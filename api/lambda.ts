@@ -7,7 +7,7 @@ export interface ProxyResponse {
 export const handler = async (
   event: APIGatewayProxyEvent
 ): Promise<APIGatewayProxyResult> => {
-  console.log(event);
+  console.log(JSON.stringify(event, null, 2));
   const response: ProxyResponse = {
     data: "hello world",
   };
