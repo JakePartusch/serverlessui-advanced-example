@@ -29,7 +29,7 @@ function App({}: AppProps) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            Learn Stuff
           </a>
         </p>
       </header>
