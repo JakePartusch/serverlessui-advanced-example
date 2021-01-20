@@ -13,4 +13,5 @@ jobs:
         with:
           node-version: "12.x"
       - run: npm ci
+      - run: npm install -g aws-cdk@1.80.0
       - run: npx @jakepartusch/notlify --domain=homebrewer.dev --subDomain=test --api=./api/lambda.ts --ui=./ui/build
