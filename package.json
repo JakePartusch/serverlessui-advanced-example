@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "cd ui && npm run build"
+    "install:ui": "cd ui && npm ci",
+    "build:ui": "cd ui && npm run build"
   },
   "author": "",
   "license": "ISC",
