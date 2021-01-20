@@ -23,3 +23,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
       - run: npx @jakepartusch/notlify@0.0.7 --domain=homebrewer.dev --api=./api/lambda.ts --ui=./ui/build
+      - uses: chrnorm/deployment-action@releases/v1
+        name: Create GitHub deployment
+        id: deployment
+        with:
+          token: "${{ github.token }}"
+          target_url: https://homebrewer.dev
+          environment: preview
