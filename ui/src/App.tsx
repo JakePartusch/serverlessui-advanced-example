@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import type { ProxyResponse } from '../../api/lambda';
+import type { ProxyResponse } from '../../api/hello';
 
 interface AppProps {}
 
@@ -9,7 +9,7 @@ function App({}: AppProps) {
   const [data, setData] = useState('');
 
   const fetchData = async () => {
-    const response: ProxyResponse = await (await fetch('/api/blah')).json();
+    const response: ProxyResponse = await (await fetch('/api/hello')).json();
     setData(response.data);
   };
 

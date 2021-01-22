@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
-    "@jakepartusch/notlify": "0.0.12",
+    "@jakepartusch/notlify": "0.0.18",
     "@types/aws-lambda": "^8.10.70"
   }
 }
