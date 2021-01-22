@@ -15,7 +15,7 @@ jobs:
       - run: npm ci
       - run: npm run install:ui
       - run: npm run build:ui
-      - run: npm install -g aws-cdk@1.80.0
+      - run: npm install -g aws-cdk@1.85.0
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
