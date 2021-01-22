@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import type { ProxyResponse } from '../../api/lambda';
+import type { ProxyResponse } from '../functions/hello';
 
 interface AppProps {}
 
@@ -9,7 +9,7 @@ function App({}: AppProps) {
   const [data, setData] = useState('');
 
   const fetchData = async () => {
-    const response: ProxyResponse = await (await fetch('/api/blah')).json();
+    const response: ProxyResponse = await (await fetch('/api/hello')).json();
     setData(response.data);
   };
 
@@ -21,9 +21,6 @@ function App({}: AppProps) {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
         <p>{data}</p>
         <p>
           <a
@@ -32,7 +29,7 @@ function App({}: AppProps) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Learn React
+            Learn Stuff
           </a>
         </p>
       </header>
