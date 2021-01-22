@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import type { ProxyResponse } from '../../api/hello';
+import type { ProxyResponse } from '../functions/hello';
 
 interface AppProps {}
 
