@@ -23,4 +23,4 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - run: npx @jakepartusch/notlify --prod --domain=homebrewer.dev --dir=./build
+      - run: npx @jakepartusch/notlify --prod=true --domain=homebrewer.dev --dir=./build
