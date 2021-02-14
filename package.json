@@ -7,6 +7,9 @@
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
+    "apollo-server-lambda": "^2.21.0",
+    "aws-sdk": "^2.843.0",
+    "graphql": "^15.5.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },
