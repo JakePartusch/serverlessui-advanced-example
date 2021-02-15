@@ -1,16 +1,22 @@
-import { ApolloServer, gql } from 'apollo-server-lambda';
+import { ApolloServer } from 'apollo-server-lambda';
+import {
+  QueryUserArgs,
+  Resolvers,
+  Role,
+  User,
+} from '../@types/generated-graphql-resolvers';
+import typeDefs from '../schema';
 
-// Construct a schema, using GraphQL schema language
-const typeDefs = gql`
-  type Query {
-    hello: String
-  }
-`;
-
-// Provide resolver functions for your schema fields
-const resolvers = {
+const resolvers: Resolvers = {
   Query: {
-    hello: () => 'Hello world!',
+    user: (_parent, { id }: QueryUserArgs): User => {
+      return {
+        id,
+        email: 'test@gmail.com',
+        role: Role.Admin,
+        username: 'testuser',
+      };
+    },
   },
 };
 

@@ -1,27 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import type { ProxyResponse } from '../functions/hello';
+import { useFindUserQuery } from './generated/graphql-hooks';
 
 interface AppProps {}
 
 function App({}: AppProps) {
-  const [data, setData] = useState('');
-
-  const fetchData = async () => {
-    const response: ProxyResponse = await (await fetch('/api/hello')).json();
-    setData(response.data);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { loading, error, data } = useFindUserQuery({
+    variables: {
+      userId: '1234',
+    },
+  });
 
   return (
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>{data}</p>
+        <p>{data?.user?.id}</p>
         <p>
           <a
             className="App-link"
