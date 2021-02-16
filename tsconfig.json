@@ -1,5 +1,5 @@
 {
-  "include": ["src", "types"],
+  "include": ["src", "types", "functions"],
   "compilerOptions": {
     "module": "esnext",
     "target": "esnext",
@@ -21,6 +21,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "importsNotUsedAsValues": "error"
+    "importsNotUsedAsValues": "remove"
   }
 }

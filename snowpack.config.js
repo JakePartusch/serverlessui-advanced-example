@@ -1,5 +1,8 @@
 /** @type {import("snowpack").SnowpackUserConfig } */
 module.exports = {
+  alias: {
+    types: './types',
+  },
   mount: {
     public: { url: '/', static: true },
     src: { url: '/dist' },

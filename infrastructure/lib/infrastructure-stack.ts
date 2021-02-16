@@ -2,7 +2,7 @@ import * as cdk from '@aws-cdk/core';
 import { ServerlessUI } from '@serverlessui/construct';
 import { Source } from '@aws-cdk/aws-s3-deployment';
 import { Table, AttributeType, ProjectionType } from '@aws-cdk/aws-dynamodb';
-import { Order } from '../../@types/generated-graphql-resolvers';
+import { Order } from '../../types/generated/graphql-resolvers';
 
 type SecondaryIndexNonKeyAttribute = keyof Omit<Order, 'customerFullName'>;
 export class InfrastructureStack extends cdk.Stack {
