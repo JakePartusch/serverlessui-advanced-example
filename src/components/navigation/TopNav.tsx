@@ -82,13 +82,9 @@ const TopNav = () => (
               id="user-menu"
               aria-haspopup="true"
             >
-              <img
-                className="h-8 w-8 rounded-full"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixqx=TNYTRaOJog&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt=""
-              />
+              <img className="h-8 w-8 rounded-full" src="/jake.jpg" alt="" />
               <span className="hidden ml-3 text-gray-700 text-sm font-medium lg:block">
-                <span className="sr-only">Open user menu for </span>Emilia Birch
+                <span className="sr-only">Open user menu for </span>Jake
               </span>
               <svg
                 className="hidden flex-shrink-0 ml-1 h-5 w-5 text-gray-400 lg:block"

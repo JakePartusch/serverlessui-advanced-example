@@ -6,7 +6,7 @@ import DesktopSidebar from './sidebar/DesktopSidebar';
 import WelcomeBanner from './WelcomeBanner';
 
 const Dashboard = () => {
-  const { loading, error, data } = useFindAllOrdersQuery();
+  const { loading, data } = useFindAllOrdersQuery();
   const orders: Order[] = [];
   data?.allOrders?.forEach((order) => {
     if (order) {

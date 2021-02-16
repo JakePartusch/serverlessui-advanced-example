@@ -17,22 +17,17 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  me: User;
-  user?: Maybe<User>;
-  allUsers?: Maybe<Array<Maybe<User>>>;
-  search: Array<SearchResult>;
-  myChats: Array<Chat>;
   allOrders?: Maybe<Array<Maybe<Order>>>;
 };
 
+export enum Status {
+  Pending = 'PENDING',
+  Shipped = 'SHIPPED',
+  Complete = 'COMPLETE'
+}
 
-export type QueryUserArgs = {
+export type Node = {
   id: Scalars['ID'];
-};
-
-
-export type QuerySearchArgs = {
-  term: Scalars['String'];
 };
 
 export type Order = Node & {
@@ -42,46 +37,6 @@ export type Order = Node & {
   totalPrice: Scalars['Int'];
   status: Status;
   createdDate: Scalars['Date'];
-};
-
-export enum Status {
-  Pending = 'PENDING',
-  Shipped = 'SHIPPED',
-  Complete = 'COMPLETE'
-}
-
-export enum Role {
-  User = 'USER',
-  Admin = 'ADMIN'
-}
-
-export type Node = {
-  id: Scalars['ID'];
-};
-
-export type SearchResult = User | Chat | ChatMessage;
-
-export type User = Node & {
-  __typename?: 'User';
-  id: Scalars['ID'];
-  username: Scalars['String'];
-  email: Scalars['String'];
-  role: Role;
-};
-
-export type Chat = Node & {
-  __typename?: 'Chat';
-  id: Scalars['ID'];
-  users: Array<User>;
-  messages: Array<ChatMessage>;
-};
-
-export type ChatMessage = Node & {
-  __typename?: 'ChatMessage';
-  id: Scalars['ID'];
-  content: Scalars['String'];
-  time: Scalars['Date'];
-  user: User;
 };
 
 export type FindAllOrdersQueryVariables = Exact<{ [key: string]: never; }>;
