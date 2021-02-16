@@ -1,9 +1,9 @@
 name: Serverless UI Build & Deploy
 
-on: [pull_request]
+on: [push]
 
 jobs:
-  build-domain:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
