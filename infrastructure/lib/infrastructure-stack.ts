@@ -4,10 +4,7 @@ import { Source } from '@aws-cdk/aws-s3-deployment';
 import { Table, AttributeType, ProjectionType } from '@aws-cdk/aws-dynamodb';
 import { Order } from '../../@types/generated-graphql-resolvers';
 
-export const TABLE_NAME = 'test-table';
-
 type SecondaryIndexNonKeyAttribute = keyof Omit<Order, 'customerFullName'>;
-
 export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
