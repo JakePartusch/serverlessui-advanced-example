@@ -1,25 +1,36 @@
-# New Project
+# Serverless UI Advanced
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+This repository showcases a complex integration example.
 
-## Available Scripts
+Technologies:
 
-### npm start
+- Front-end: Snowpack + React + Apollo client
+- Back-end: GraphQL + Apollo Server + DynamoDB
+- Infrastructure: AWS CDK + Serverless UI construct
 
-Runs the app in the development mode.
-Open http://localhost:8080 to view it in the browser.
+## Serverless UI integration
 
-The page will reload if you make edits.
-You will also see any lint errors in the console.
+This repository uses the @serverlessui/construct package to directly integrate existing infrastructure with Serverless UI
 
-### npm run build
-
-Builds a static copy of your site to the `build/` folder.
-Your app is ready to be deployed!
-
-**For the best production performance:** Add a build bundler plugin like "@snowpack/plugin-webpack" to your `snowpack.config.js` config file.
-
-### npm test
-
-Launches the application test runner.
-Run with the `--watch` flag (`npm test -- --watch`) to run in interactive watch mode.
+```
+    const { functions } = new ServerlessUI(this, 'ServerlessUI', {
+      buildId: 'advanced-example',
+      uiSources: [Source.asset(`${__dirname}/../../build`)],
+      apiEntries: [`${__dirname}/../../functions/graphql.ts`],
+      apiEnvironment: {
+        TABLE_NAME: table.tableName,
+      },
+      domain: {
+        domainName: 'serverlessui.app',
+        hostedZone: HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
+          hostedZoneId: 'Z1XXXXXXXXXXXXX',
+          zoneName: 'serverlessui.app',
+        }),
+        certificate: Certificate.fromCertificateArn(
+          this,
+          'Certificate',
+          'arn:aws:acm:us-east-1:xxxxxxxxxx:certificate/xxxxxx-xxxx-xxxx-xxxxxx',
+        ),
+      },
+    });
+```
