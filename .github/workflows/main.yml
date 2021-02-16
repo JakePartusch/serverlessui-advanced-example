@@ -15,6 +15,7 @@ jobs:
         with:
           node-version: '12.x'
       - run: npm ci
+      - run: cd infrastructure && npm ci
       - run: npm install -g aws-cdk
       - run: npm run build
       - name: Configure AWS Credentials
