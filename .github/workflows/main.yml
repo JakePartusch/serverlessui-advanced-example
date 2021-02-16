@@ -13,15 +13,14 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '12.x'
       - run: npm ci
-      - run: npm run build
-      - run: npm install -g @serverlessui/cli
       - run: npm install -g aws-cdk
+      - run: npm run build
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-      - run: sui deploy --prod --dir=./build
+      - run: npm run deploy
