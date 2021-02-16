@@ -2,7 +2,7 @@ schema:
   - schema.graphql
 documents: './src/**/*.graphql'
 generates:
-  ./types/generated/graphql-hooks.ts:
+  ./src/types/generated/graphql-hooks.ts:
     plugins:
       - typescript
       - typescript-operations

@@ -1,5 +1,8 @@
 import React from 'react';
-import { Order, useFindAllOrdersQuery } from 'types/generated/graphql-hooks';
+import {
+  Order,
+  useFindAllOrdersQuery,
+} from 'src/types/generated/graphql-hooks';
 import TopNav from './navigation/TopNav';
 import RecentActivity from './RecentActivity';
 import DesktopSidebar from './sidebar/DesktopSidebar';

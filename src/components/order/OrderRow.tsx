@@ -1,5 +1,5 @@
 import React from 'react';
-import { Order, Status } from 'types/generated/graphql-hooks';
+import { Order, Status } from 'src/types/generated/graphql-hooks';
 
 interface OrderRowProps {
   order: Order;

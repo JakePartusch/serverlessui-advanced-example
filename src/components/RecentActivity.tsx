@@ -1,6 +1,6 @@
 import React from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
-import type { Order } from 'types/generated/graphql-hooks';
+import type { Order } from 'src/types/generated/graphql-hooks';
 import OrderRow from './order/OrderRow';
 
 interface RecentActivityProps {
