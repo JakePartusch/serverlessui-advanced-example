@@ -1,9 +1,13 @@
-query allOrders {
-  order {
-    id
-    customerFullName
-    totalPrice
-    status
-    createdDate
+query findAllOrders {
+  allOrders {
+    ...DashboardFields
   }
+}
+
+fragment DashboardFields on Order {
+  id
+  customerFullName
+  totalPrice
+  status
+  createdDate
 }

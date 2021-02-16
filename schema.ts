@@ -13,7 +13,7 @@ export default gql`
     allUsers: [User]
     search(term: String!): [SearchResult!]!
     myChats: [Chat!]!
-    order: [Order]
+    allOrders: [Order]
   }
 
   type Order implements Node {

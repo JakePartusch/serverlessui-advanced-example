@@ -1,12 +1,19 @@
 import React from 'react';
-import { useAllOrdersQuery } from '../generated/graphql-hooks';
+import { Order, useFindAllOrdersQuery } from '../generated/graphql-hooks';
 import TopNav from './navigation/TopNav';
 import RecentActivity from './RecentActivity';
 import DesktopSidebar from './sidebar/DesktopSidebar';
 import WelcomeBanner from './WelcomeBanner';
 
-const Home = () => {
-  const { loading, error, data } = useAllOrdersQuery();
+const Dashboard = () => {
+  const { loading, error, data } = useFindAllOrdersQuery();
+  const orders: Order[] = [];
+  data?.allOrders?.forEach((order) => {
+    if (order) {
+      orders.push(order);
+    }
+  });
+
   return (
     <div className="h-screen flex overflow-hidden bg-gray-100">
       <DesktopSidebar />
@@ -14,10 +21,10 @@ const Home = () => {
         <TopNav />
         <main className="flex-1 relative pb-8 z-0 overflow-y-auto">
           <WelcomeBanner />
-          <RecentActivity orders={[]} />
+          <RecentActivity loading={loading} orders={orders} />
         </main>
       </div>
     </div>
   );
 };
-export default Home;
+export default Dashboard;

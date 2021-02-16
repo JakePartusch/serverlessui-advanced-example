@@ -22,7 +22,7 @@ export type Query = {
   allUsers?: Maybe<Array<Maybe<User>>>;
   search: Array<SearchResult>;
   myChats: Array<Chat>;
-  order?: Maybe<Array<Maybe<Order>>>;
+  allOrders?: Maybe<Array<Maybe<Order>>>;
 };
 
 
@@ -205,7 +205,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   allUsers?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   search?: Resolver<Array<ResolversTypes['SearchResult']>, ParentType, ContextType, RequireFields<QuerySearchArgs, 'term'>>;
   myChats?: Resolver<Array<ResolversTypes['Chat']>, ParentType, ContextType>;
-  order?: Resolver<Maybe<Array<Maybe<ResolversTypes['Order']>>>, ParentType, ContextType>;
+  allOrders?: Resolver<Maybe<Array<Maybe<ResolversTypes['Order']>>>, ParentType, ContextType>;
 }>;
 
 export type OrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Order'] = ResolversParentTypes['Order']> = ResolversObject<{

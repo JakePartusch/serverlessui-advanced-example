@@ -19,7 +19,7 @@ const resolvers: Resolvers = {
         username: 'testuser',
       };
     },
-    order: (_parent): Order[] => {
+    allOrders: (_parent): Order[] => {
       return [
         {
           id: '12345',
@@ -33,6 +33,12 @@ const resolvers: Resolvers = {
   },
 };
 
-const server = new ApolloServer({ typeDefs, resolvers, playground: true });
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  playground: {
+    endpoint: '/prod/api/graphql',
+  },
+});
 
 export const handler = server.createHandler();

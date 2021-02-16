@@ -22,7 +22,7 @@ export type Query = {
   allUsers?: Maybe<Array<Maybe<User>>>;
   search: Array<SearchResult>;
   myChats: Array<Chat>;
-  order?: Maybe<Array<Maybe<Order>>>;
+  allOrders?: Maybe<Array<Maybe<Order>>>;
 };
 
 
@@ -84,51 +84,60 @@ export type ChatMessage = Node & {
   user: User;
 };
 
-export type AllOrdersQueryVariables = Exact<{ [key: string]: never; }>;
+export type FindAllOrdersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AllOrdersQuery = (
+export type FindAllOrdersQuery = (
   { __typename?: 'Query' }
-  & { order?: Maybe<Array<Maybe<(
+  & { allOrders?: Maybe<Array<Maybe<(
     { __typename?: 'Order' }
-    & Pick<Order, 'id' | 'customerFullName' | 'totalPrice' | 'status' | 'createdDate'>
+    & DashboardFieldsFragment
   )>>> }
 );
 
+export type DashboardFieldsFragment = (
+  { __typename?: 'Order' }
+  & Pick<Order, 'id' | 'customerFullName' | 'totalPrice' | 'status' | 'createdDate'>
+);
 
-export const AllOrdersDocument = gql`
-    query allOrders {
-  order {
-    id
-    customerFullName
-    totalPrice
-    status
-    createdDate
-  }
+export const DashboardFieldsFragmentDoc = gql`
+    fragment DashboardFields on Order {
+  id
+  customerFullName
+  totalPrice
+  status
+  createdDate
 }
     `;
+export const FindAllOrdersDocument = gql`
+    query findAllOrders {
+  allOrders {
+    ...DashboardFields
+  }
+}
+    ${DashboardFieldsFragmentDoc}`;
 
 /**
- * __useAllOrdersQuery__
+ * __useFindAllOrdersQuery__
  *
- * To run a query within a React component, call `useAllOrdersQuery` and pass it any options that fit your needs.
- * When your component renders, `useAllOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFindAllOrdersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindAllOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAllOrdersQuery({
+ * const { data, loading, error } = useFindAllOrdersQuery({
  *   variables: {
  *   },
  * });
  */
-export function useAllOrdersQuery(baseOptions?: Apollo.QueryHookOptions<AllOrdersQuery, AllOrdersQueryVariables>) {
-        return Apollo.useQuery<AllOrdersQuery, AllOrdersQueryVariables>(AllOrdersDocument, baseOptions);
+export function useFindAllOrdersQuery(baseOptions?: Apollo.QueryHookOptions<FindAllOrdersQuery, FindAllOrdersQueryVariables>) {
+        return Apollo.useQuery<FindAllOrdersQuery, FindAllOrdersQueryVariables>(FindAllOrdersDocument, baseOptions);
       }
-export function useAllOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllOrdersQuery, AllOrdersQueryVariables>) {
-          return Apollo.useLazyQuery<AllOrdersQuery, AllOrdersQueryVariables>(AllOrdersDocument, baseOptions);
+export function useFindAllOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindAllOrdersQuery, FindAllOrdersQueryVariables>) {
+          return Apollo.useLazyQuery<FindAllOrdersQuery, FindAllOrdersQueryVariables>(FindAllOrdersDocument, baseOptions);
         }
-export type AllOrdersQueryHookResult = ReturnType<typeof useAllOrdersQuery>;
-export type AllOrdersLazyQueryHookResult = ReturnType<typeof useAllOrdersLazyQuery>;
-export type AllOrdersQueryResult = Apollo.QueryResult<AllOrdersQuery, AllOrdersQueryVariables>;
+export type FindAllOrdersQueryHookResult = ReturnType<typeof useFindAllOrdersQuery>;
+export type FindAllOrdersLazyQueryHookResult = ReturnType<typeof useFindAllOrdersLazyQuery>;
+export type FindAllOrdersQueryResult = Apollo.QueryResult<FindAllOrdersQuery, FindAllOrdersQueryVariables>;
