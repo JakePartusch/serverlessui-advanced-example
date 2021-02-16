@@ -1,8 +1,10 @@
 import { ApolloServer } from 'apollo-server-lambda';
 import {
+  Order,
   QueryUserArgs,
   Resolvers,
   Role,
+  Status,
   User,
 } from '../@types/generated-graphql-resolvers';
 import typeDefs from '../schema';
@@ -16,6 +18,17 @@ const resolvers: Resolvers = {
         role: Role.Admin,
         username: 'testuser',
       };
+    },
+    order: (_parent): Order[] => {
+      return [
+        {
+          id: '12345',
+          customerFullName: 'Molly Sanders',
+          totalPrice: 1099,
+          status: Status.Pending,
+          createdDate: new Date().toISOString(),
+        },
+      ];
     },
   },
 };

@@ -22,6 +22,7 @@ export type Query = {
   allUsers?: Maybe<Array<Maybe<User>>>;
   search: Array<SearchResult>;
   myChats: Array<Chat>;
+  order?: Maybe<Array<Maybe<Order>>>;
 };
 
 
@@ -33,6 +34,21 @@ export type QueryUserArgs = {
 export type QuerySearchArgs = {
   term: Scalars['String'];
 };
+
+export type Order = Node & {
+  __typename?: 'Order';
+  id: Scalars['ID'];
+  customerFullName: Scalars['String'];
+  totalPrice: Scalars['Int'];
+  status: Status;
+  createdDate: Scalars['Date'];
+};
+
+export enum Status {
+  Pending = 'PENDING',
+  Shipped = 'SHIPPED',
+  Complete = 'COMPLETE'
+}
 
 export enum Role {
   User = 'USER',
@@ -151,8 +167,11 @@ export type ResolversTypes = ResolversObject<{
   Query: ResolverTypeWrapper<{}>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   String: ResolverTypeWrapper<Scalars['String']>;
+  Order: ResolverTypeWrapper<Order>;
+  Int: ResolverTypeWrapper<Scalars['Int']>;
+  Status: Status;
   Role: Role;
-  Node: ResolversTypes['User'] | ResolversTypes['Chat'] | ResolversTypes['ChatMessage'];
+  Node: ResolversTypes['Order'] | ResolversTypes['User'] | ResolversTypes['Chat'] | ResolversTypes['ChatMessage'];
   SearchResult: ResolversTypes['User'] | ResolversTypes['Chat'] | ResolversTypes['ChatMessage'];
   User: ResolverTypeWrapper<User>;
   Chat: ResolverTypeWrapper<Chat>;
@@ -166,7 +185,9 @@ export type ResolversParentTypes = ResolversObject<{
   Query: {};
   ID: Scalars['ID'];
   String: Scalars['String'];
-  Node: ResolversParentTypes['User'] | ResolversParentTypes['Chat'] | ResolversParentTypes['ChatMessage'];
+  Order: Order;
+  Int: Scalars['Int'];
+  Node: ResolversParentTypes['Order'] | ResolversParentTypes['User'] | ResolversParentTypes['Chat'] | ResolversParentTypes['ChatMessage'];
   SearchResult: ResolversParentTypes['User'] | ResolversParentTypes['Chat'] | ResolversParentTypes['ChatMessage'];
   User: User;
   Chat: Chat;
@@ -184,10 +205,20 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
   allUsers?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
   search?: Resolver<Array<ResolversTypes['SearchResult']>, ParentType, ContextType, RequireFields<QuerySearchArgs, 'term'>>;
   myChats?: Resolver<Array<ResolversTypes['Chat']>, ParentType, ContextType>;
+  order?: Resolver<Maybe<Array<Maybe<ResolversTypes['Order']>>>, ParentType, ContextType>;
+}>;
+
+export type OrderResolvers<ContextType = any, ParentType extends ResolversParentTypes['Order'] = ResolversParentTypes['Order']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  customerFullName?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  totalPrice?: Resolver<ResolversTypes['Int'], ParentType, ContextType>;
+  status?: Resolver<ResolversTypes['Status'], ParentType, ContextType>;
+  createdDate?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = ResolversObject<{
-  __resolveType: TypeResolveFn<'User' | 'Chat' | 'ChatMessage', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'Order' | 'User' | 'Chat' | 'ChatMessage', ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
 }>;
 
@@ -221,6 +252,7 @@ export type ChatMessageResolvers<ContextType = any, ParentType extends Resolvers
 export type Resolvers<ContextType = any> = ResolversObject<{
   Date?: GraphQLScalarType;
   Query?: QueryResolvers<ContextType>;
+  Order?: OrderResolvers<ContextType>;
   Node?: NodeResolvers<ContextType>;
   SearchResult?: SearchResultResolvers<ContextType>;
   User?: UserResolvers<ContextType>;

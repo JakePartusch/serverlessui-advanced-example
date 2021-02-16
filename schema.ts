@@ -13,6 +13,21 @@ export default gql`
     allUsers: [User]
     search(term: String!): [SearchResult!]!
     myChats: [Chat!]!
+    order: [Order]
+  }
+
+  type Order implements Node {
+    id: ID!
+    customerFullName: String!
+    totalPrice: Int!
+    status: Status!
+    createdDate: Date!
+  }
+
+  enum Status {
+    PENDING
+    SHIPPED
+    COMPLETE
   }
 
   enum Role {

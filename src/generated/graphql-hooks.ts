@@ -22,6 +22,7 @@ export type Query = {
   allUsers?: Maybe<Array<Maybe<User>>>;
   search: Array<SearchResult>;
   myChats: Array<Chat>;
+  order?: Maybe<Array<Maybe<Order>>>;
 };
 
 
@@ -33,6 +34,21 @@ export type QueryUserArgs = {
 export type QuerySearchArgs = {
   term: Scalars['String'];
 };
+
+export type Order = Node & {
+  __typename?: 'Order';
+  id: Scalars['ID'];
+  customerFullName: Scalars['String'];
+  totalPrice: Scalars['Int'];
+  status: Status;
+  createdDate: Scalars['Date'];
+};
+
+export enum Status {
+  Pending = 'PENDING',
+  Shipped = 'SHIPPED',
+  Complete = 'COMPLETE'
+}
 
 export enum Role {
   User = 'USER',
@@ -68,61 +84,51 @@ export type ChatMessage = Node & {
   user: User;
 };
 
-export type FindUserQueryVariables = Exact<{
-  userId: Scalars['ID'];
-}>;
+export type AllOrdersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindUserQuery = (
+export type AllOrdersQuery = (
   { __typename?: 'Query' }
-  & { user?: Maybe<(
-    { __typename?: 'User' }
-    & UserFieldsFragment
-  )> }
+  & { order?: Maybe<Array<Maybe<(
+    { __typename?: 'Order' }
+    & Pick<Order, 'id' | 'customerFullName' | 'totalPrice' | 'status' | 'createdDate'>
+  )>>> }
 );
 
-export type UserFieldsFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'id' | 'username' | 'role'>
-);
 
-export const UserFieldsFragmentDoc = gql`
-    fragment UserFields on User {
-  id
-  username
-  role
-}
-    `;
-export const FindUserDocument = gql`
-    query findUser($userId: ID!) {
-  user(id: $userId) {
-    ...UserFields
+export const AllOrdersDocument = gql`
+    query allOrders {
+  order {
+    id
+    customerFullName
+    totalPrice
+    status
+    createdDate
   }
 }
-    ${UserFieldsFragmentDoc}`;
+    `;
 
 /**
- * __useFindUserQuery__
+ * __useAllOrdersQuery__
  *
- * To run a query within a React component, call `useFindUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useFindUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useAllOrdersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAllOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFindUserQuery({
+ * const { data, loading, error } = useAllOrdersQuery({
  *   variables: {
- *      userId: // value for 'userId'
  *   },
  * });
  */
-export function useFindUserQuery(baseOptions: Apollo.QueryHookOptions<FindUserQuery, FindUserQueryVariables>) {
-        return Apollo.useQuery<FindUserQuery, FindUserQueryVariables>(FindUserDocument, baseOptions);
+export function useAllOrdersQuery(baseOptions?: Apollo.QueryHookOptions<AllOrdersQuery, AllOrdersQueryVariables>) {
+        return Apollo.useQuery<AllOrdersQuery, AllOrdersQueryVariables>(AllOrdersDocument, baseOptions);
       }
-export function useFindUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindUserQuery, FindUserQueryVariables>) {
-          return Apollo.useLazyQuery<FindUserQuery, FindUserQueryVariables>(FindUserDocument, baseOptions);
+export function useAllOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AllOrdersQuery, AllOrdersQueryVariables>) {
+          return Apollo.useLazyQuery<AllOrdersQuery, AllOrdersQueryVariables>(AllOrdersDocument, baseOptions);
         }
-export type FindUserQueryHookResult = ReturnType<typeof useFindUserQuery>;
-export type FindUserLazyQueryHookResult = ReturnType<typeof useFindUserLazyQuery>;
-export type FindUserQueryResult = Apollo.QueryResult<FindUserQuery, FindUserQueryVariables>;
+export type AllOrdersQueryHookResult = ReturnType<typeof useAllOrdersQuery>;
+export type AllOrdersLazyQueryHookResult = ReturnType<typeof useAllOrdersLazyQuery>;
+export type AllOrdersQueryResult = Apollo.QueryResult<AllOrdersQuery, AllOrdersQueryVariables>;

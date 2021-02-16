@@ -1,0 +1,9 @@
+query allOrders {
+  order {
+    id
+    customerFullName
+    totalPrice
+    status
+    createdDate
+  }
+}

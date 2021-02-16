@@ -13,7 +13,8 @@
     "aws-sdk": "^2.843.0",
     "graphql": "^15.5.0",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0"
+    "react-dom": "^17.0.0",
+    "tailwindcss": "^2.0.3"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.20.1",
@@ -22,9 +23,11 @@
     "@graphql-codegen/typescript-react-apollo": "^2.2.1",
     "@graphql-codegen/typescript-resolvers": "^1.18.2",
     "@snowpack/plugin-dotenv": "^2.0.5",
+    "@snowpack/plugin-postcss": "^1.1.0",
     "@snowpack/plugin-react-refresh": "^2.4.0",
     "@snowpack/plugin-typescript": "^1.2.0",
     "@snowpack/web-test-runner-plugin": "^0.2.0",
+    "@tailwindcss/forms": "^0.2.1",
     "@testing-library/react": "^11.0.0",
     "@types/aws-lambda": "^8.10.71",
     "@types/chai": "^4.2.13",
@@ -33,7 +36,10 @@
     "@types/react-dom": "^17.0.0",
     "@types/snowpack-env": "^2.3.2",
     "@web/test-runner": "^0.12.0",
+    "autoprefixer": "^10.2.4",
     "chai": "^4.2.0",
+    "postcss": "^8.2.1",
+    "postcss-cli": "^8.3.1",
     "prettier": "^2.0.5",
     "snowpack": "^3.0.1",
     "typescript": "^4.0.0"
