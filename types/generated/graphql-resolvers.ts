@@ -16,7 +16,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  allOrders?: Maybe<Array<Maybe<Order>>>;
+  findOrders?: Maybe<Array<Maybe<Order>>>;
 };
 
 export enum Status {
@@ -145,7 +145,7 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  allOrders?: Resolver<Maybe<Array<Maybe<ResolversTypes['Order']>>>, ParentType, ContextType>;
+  findOrders?: Resolver<Maybe<Array<Maybe<ResolversTypes['Order']>>>, ParentType, ContextType>;
 }>;
 
 export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = ResolversObject<{

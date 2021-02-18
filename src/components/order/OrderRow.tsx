@@ -1,8 +1,11 @@
 import React from 'react';
-import { Order, Status } from 'src/types/generated/graphql-hooks';
+import {
+  DashboardFieldsFragment,
+  Status,
+} from 'src/types/generated/graphql-hooks';
 
 interface OrderRowProps {
-  order: Order;
+  order: DashboardFieldsFragment;
 }
 
 export const formatPrice = (amount: number) => {

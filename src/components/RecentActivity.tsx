@@ -1,11 +1,11 @@
 import React from 'react';
 import ClipLoader from 'react-spinners/ClipLoader';
-import type { Order } from 'src/types/generated/graphql-hooks';
+import type { DashboardFieldsFragment } from 'src/types/generated/graphql-hooks';
 import OrderRow from './order/OrderRow';
 
 interface RecentActivityProps {
   loading: boolean;
-  orders?: Order[];
+  orders?: DashboardFieldsFragment[];
 }
 
 const RecentActivity = ({ orders, loading }: RecentActivityProps) => (

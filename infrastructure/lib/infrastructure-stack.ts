@@ -6,7 +6,7 @@ import { HostedZone } from '@aws-cdk/aws-route53';
 import { Table, AttributeType, ProjectionType } from '@aws-cdk/aws-dynamodb';
 import { Order } from '../../types/generated/graphql-resolvers';
 
-type SecondaryIndexNonKeyAttribute = keyof Omit<Order, 'customerFullName'>;
+type SecondaryIndexNonKeyAttribute = keyof Order;
 export class InfrastructureStack extends cdk.Stack {
   constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -21,6 +21,7 @@ export class InfrastructureStack extends cdk.Stack {
       'status',
       'totalPrice',
       'createdDate',
+      'customerFullName',
     ];
 
     table.addGlobalSecondaryIndex({

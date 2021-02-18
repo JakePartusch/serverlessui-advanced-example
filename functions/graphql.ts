@@ -38,7 +38,7 @@ const fetchOrdersByStatusCode = async (status: Status): Promise<Order[]> => {
 
 const resolvers: Resolvers = {
   Query: {
-    allOrders: async (_parent): Promise<Order[]> => {
+    findOrders: async (_parent): Promise<Order[]> => {
       return await fetchAllOrders();
     },
   },
