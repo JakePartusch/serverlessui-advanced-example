@@ -8,7 +8,7 @@ export default gql`
   }
 
   type Query {
-    allOrders: [Order]
+    findOrders: [Order]
   }
 
   enum Status {
