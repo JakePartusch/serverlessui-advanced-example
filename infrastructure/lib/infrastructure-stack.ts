@@ -24,13 +24,13 @@ export class InfrastructureStack extends cdk.Stack {
       'customerFullName',
     ];
 
-    table.addGlobalSecondaryIndex({
-      indexName: 'GSI',
-      partitionKey: { name: 'GSI1PK', type: AttributeType.STRING },
-      sortKey: { name: 'GSI1SK', type: AttributeType.STRING },
-      projectionType: ProjectionType.INCLUDE,
-      nonKeyAttributes,
-    });
+    // table.addGlobalSecondaryIndex({
+    //   indexName: 'GSI',
+    //   partitionKey: { name: 'GSI1PK', type: AttributeType.STRING },
+    //   sortKey: { name: 'GSI1SK', type: AttributeType.STRING },
+    //   projectionType: ProjectionType.INCLUDE,
+    //   nonKeyAttributes,
+    // });
 
     const { functions } = new ServerlessUI(this, 'ServerlessUI', {
       buildId: 'advanced-example',
