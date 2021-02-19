@@ -17,7 +17,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  allOrders?: Maybe<Array<Maybe<Order>>>;
+  findOrders?: Maybe<Array<Maybe<Order>>>;
 };
 
 export enum Status {
@@ -39,12 +39,12 @@ export type Order = Node & {
   createdDate: Scalars['Date'];
 };
 
-export type FindAllOrdersQueryVariables = Exact<{ [key: string]: never; }>;
+export type FindOrdersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type FindAllOrdersQuery = (
+export type FindOrdersQuery = (
   { __typename?: 'Query' }
-  & { allOrders?: Maybe<Array<Maybe<(
+  & { findOrders?: Maybe<Array<Maybe<(
     { __typename?: 'Order' }
     & DashboardFieldsFragment
   )>>> }
@@ -64,35 +64,35 @@ export const DashboardFieldsFragmentDoc = gql`
   createdDate
 }
     `;
-export const FindAllOrdersDocument = gql`
-    query findAllOrders {
-  allOrders {
+export const FindOrdersDocument = gql`
+    query findOrders {
+  findOrders {
     ...DashboardFields
   }
 }
     ${DashboardFieldsFragmentDoc}`;
 
 /**
- * __useFindAllOrdersQuery__
+ * __useFindOrdersQuery__
  *
- * To run a query within a React component, call `useFindAllOrdersQuery` and pass it any options that fit your needs.
- * When your component renders, `useFindAllOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useFindOrdersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFindOrdersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useFindAllOrdersQuery({
+ * const { data, loading, error } = useFindOrdersQuery({
  *   variables: {
  *   },
  * });
  */
-export function useFindAllOrdersQuery(baseOptions?: Apollo.QueryHookOptions<FindAllOrdersQuery, FindAllOrdersQueryVariables>) {
-        return Apollo.useQuery<FindAllOrdersQuery, FindAllOrdersQueryVariables>(FindAllOrdersDocument, baseOptions);
+export function useFindOrdersQuery(baseOptions?: Apollo.QueryHookOptions<FindOrdersQuery, FindOrdersQueryVariables>) {
+        return Apollo.useQuery<FindOrdersQuery, FindOrdersQueryVariables>(FindOrdersDocument, baseOptions);
       }
-export function useFindAllOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindAllOrdersQuery, FindAllOrdersQueryVariables>) {
-          return Apollo.useLazyQuery<FindAllOrdersQuery, FindAllOrdersQueryVariables>(FindAllOrdersDocument, baseOptions);
+export function useFindOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindOrdersQuery, FindOrdersQueryVariables>) {
+          return Apollo.useLazyQuery<FindOrdersQuery, FindOrdersQueryVariables>(FindOrdersDocument, baseOptions);
         }
-export type FindAllOrdersQueryHookResult = ReturnType<typeof useFindAllOrdersQuery>;
-export type FindAllOrdersLazyQueryHookResult = ReturnType<typeof useFindAllOrdersLazyQuery>;
-export type FindAllOrdersQueryResult = Apollo.QueryResult<FindAllOrdersQuery, FindAllOrdersQueryVariables>;
+export type FindOrdersQueryHookResult = ReturnType<typeof useFindOrdersQuery>;
+export type FindOrdersLazyQueryHookResult = ReturnType<typeof useFindOrdersLazyQuery>;
+export type FindOrdersQueryResult = Apollo.QueryResult<FindOrdersQuery, FindOrdersQueryVariables>;
