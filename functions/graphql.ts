@@ -23,7 +23,7 @@ const fetchOrdersByStatusCode = async (status: Status): Promise<Order[]> => {
   if (process.env.TABLE_NAME) {
     const query: DynamoDB.DocumentClient.QueryInput = {
       TableName: process.env.TABLE_NAME,
-      IndexName: 'GSI',
+      IndexName: 'GSI1',
       KeyConditionExpression: 'GSI1PK = :GSI1PK',
       ExpressionAttributeValues: {
         ':GSI1PK': status,
