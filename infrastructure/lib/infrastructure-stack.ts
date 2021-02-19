@@ -25,7 +25,7 @@ export class InfrastructureStack extends cdk.Stack {
     ];
 
     table.addGlobalSecondaryIndex({
-      indexName: 'GSI1',
+      indexName: 'GSI',
       partitionKey: { name: 'GSI1PK', type: AttributeType.STRING },
       sortKey: { name: 'GSI1SK', type: AttributeType.STRING },
       projectionType: ProjectionType.INCLUDE,
