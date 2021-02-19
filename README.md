@@ -1,6 +1,6 @@
 # Serverless UI Advanced
 
-This repository showcases a complex integration example.
+This repository showcases a complex integration example for [Serverless UI](https://github.com/JakePartusch/serverlessui)
 
 Technologies:
 
