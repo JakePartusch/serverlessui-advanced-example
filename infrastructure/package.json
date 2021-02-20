@@ -27,6 +27,7 @@
     "@aws-cdk/core": "1.89.0",
     "@serverlessui/construct": "^0.5.0-alpha.0",
     "esbuild": "^0.8.45",
+    "nanoid": "^3.1.20",
     "source-map-support": "^0.5.16"
   }
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   DashboardFieldsFragment,
+  Status,
   useFindOrdersQuery,
 } from 'src/types/generated/graphql-hooks';
 import TopNav from './navigation/TopNav';
@@ -9,7 +10,11 @@ import DesktopSidebar from './sidebar/DesktopSidebar';
 import WelcomeBanner from './WelcomeBanner';
 
 const Dashboard = () => {
-  const { loading, data } = useFindOrdersQuery();
+  const { loading, data } = useFindOrdersQuery({
+    variables: {
+      status: Status.Pending,
+    },
+  });
   const orders: DashboardFieldsFragment[] = [];
   data?.findOrders?.forEach((order) => {
     if (order) {
