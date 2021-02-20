@@ -6,4 +6,4 @@ import { InfrastructureStack } from '../lib/infrastructure-stack';
 
 const app = new cdk.App();
 const nanoid = customAlphabet('0123456789abcdef', 8);
-new InfrastructureStack(app, `ServerlessUIAdvancedExamplePreview${nanoid}`);
+new InfrastructureStack(app, `ServerlessUIAdvancedExamplePreview${nanoid()}`);
