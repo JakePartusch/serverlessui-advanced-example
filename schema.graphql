@@ -5,7 +5,7 @@ schema {
 }
 
 type Query {
-  findOrders(status: Status!): [Order]
+  findOrders(status: Status): [Order]
 }
 
 enum Status {
@@ -20,15 +20,8 @@ interface Node {
 
 type Order implements Node {
   id: ID!
-  customer: Customer!
+  customerFullName: String!
   totalPrice: Int!
   status: Status!
   createdDate: Date!
-}
-
-type Customer implements Node {
-  id: ID!
-  firstName: String!
-  lastName: String!
-  fullName: String!
 }

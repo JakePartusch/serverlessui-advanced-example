@@ -9,7 +9,5 @@ fragment DashboardFields on Order {
   totalPrice
   status
   createdDate
-  customer {
-    fullName
-  }
+  customerFullName
 }

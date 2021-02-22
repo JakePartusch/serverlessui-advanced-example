@@ -39,7 +39,7 @@ const fetchOrdersByStatusCode = async (status: Status): Promise<Order[]> => {
 const resolvers: Resolvers = {
   Query: {
     findOrders: async (_parent, { status }): Promise<Order[]> => {
-      return await fetchOrdersByStatusCode(status);
+      return await fetchOrdersByStatusCode(status ?? Status.Pending);
     },
   },
 };

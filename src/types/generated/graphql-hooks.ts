@@ -22,7 +22,7 @@ export type Query = {
 
 
 export type QueryFindOrdersArgs = {
-  status: Status;
+  status?: Maybe<Status>;
 };
 
 export enum Status {
@@ -38,18 +38,10 @@ export type Node = {
 export type Order = Node & {
   __typename?: 'Order';
   id: Scalars['ID'];
-  customer: Customer;
+  customerFullName: Scalars['String'];
   totalPrice: Scalars['Int'];
   status: Status;
   createdDate: Scalars['Date'];
-};
-
-export type Customer = Node & {
-  __typename?: 'Customer';
-  id: Scalars['ID'];
-  firstName: Scalars['String'];
-  lastName: Scalars['String'];
-  fullName: Scalars['String'];
 };
 
 export type FindOrdersQueryVariables = Exact<{
@@ -67,11 +59,7 @@ export type FindOrdersQuery = (
 
 export type DashboardFieldsFragment = (
   { __typename?: 'Order' }
-  & Pick<Order, 'id' | 'totalPrice' | 'status' | 'createdDate'>
-  & { customer: (
-    { __typename?: 'Customer' }
-    & Pick<Customer, 'fullName'>
-  ) }
+  & Pick<Order, 'id' | 'totalPrice' | 'status' | 'createdDate' | 'customerFullName'>
 );
 
 export const DashboardFieldsFragmentDoc = gql`
@@ -80,9 +68,7 @@ export const DashboardFieldsFragmentDoc = gql`
   totalPrice
   status
   createdDate
-  customer {
-    fullName
-  }
+  customerFullName
 }
     `;
 export const FindOrdersDocument = gql`
