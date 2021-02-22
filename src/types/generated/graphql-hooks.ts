@@ -20,6 +20,11 @@ export type Query = {
   findOrders?: Maybe<Array<Maybe<Order>>>;
 };
 
+
+export type QueryFindOrdersArgs = {
+  status?: Maybe<Status>;
+};
+
 export enum Status {
   Pending = 'PENDING',
   Shipped = 'SHIPPED',
@@ -39,7 +44,9 @@ export type Order = Node & {
   createdDate: Scalars['Date'];
 };
 
-export type FindOrdersQueryVariables = Exact<{ [key: string]: never; }>;
+export type FindOrdersQueryVariables = Exact<{
+  status: Status;
+}>;
 
 
 export type FindOrdersQuery = (
@@ -52,21 +59,21 @@ export type FindOrdersQuery = (
 
 export type DashboardFieldsFragment = (
   { __typename?: 'Order' }
-  & Pick<Order, 'id' | 'customerFullName' | 'totalPrice' | 'status' | 'createdDate'>
+  & Pick<Order, 'id' | 'totalPrice' | 'status' | 'createdDate' | 'customerFullName'>
 );
 
 export const DashboardFieldsFragmentDoc = gql`
     fragment DashboardFields on Order {
   id
-  customerFullName
   totalPrice
   status
   createdDate
+  customerFullName
 }
     `;
 export const FindOrdersDocument = gql`
-    query findOrders {
-  findOrders {
+    query findOrders($status: Status!) {
+  findOrders(status: $status) {
     ...DashboardFields
   }
 }
@@ -84,10 +91,11 @@ export const FindOrdersDocument = gql`
  * @example
  * const { data, loading, error } = useFindOrdersQuery({
  *   variables: {
+ *      status: // value for 'status'
  *   },
  * });
  */
-export function useFindOrdersQuery(baseOptions?: Apollo.QueryHookOptions<FindOrdersQuery, FindOrdersQueryVariables>) {
+export function useFindOrdersQuery(baseOptions: Apollo.QueryHookOptions<FindOrdersQuery, FindOrdersQueryVariables>) {
         return Apollo.useQuery<FindOrdersQuery, FindOrdersQueryVariables>(FindOrdersDocument, baseOptions);
       }
 export function useFindOrdersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FindOrdersQuery, FindOrdersQueryVariables>) {

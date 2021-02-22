@@ -6,9 +6,17 @@ import { HostedZone } from '@aws-cdk/aws-route53';
 import { Table, AttributeType, ProjectionType } from '@aws-cdk/aws-dynamodb';
 import { Order } from '../../types/generated/graphql-resolvers';
 
+interface InfrastructureStackProps extends cdk.StackProps {
+  buildId: string;
+}
+
 type SecondaryIndexNonKeyAttribute = keyof Order;
 export class InfrastructureStack extends cdk.Stack {
-  constructor(scope: cdk.Construct, id: string, props?: cdk.StackProps) {
+  constructor(
+    scope: cdk.Construct,
+    id: string,
+    props: InfrastructureStackProps,
+  ) {
     super(scope, id, props);
 
     const table = new Table(this, 'Table', {
@@ -33,7 +41,9 @@ export class InfrastructureStack extends cdk.Stack {
     });
 
     const { functions } = new ServerlessUI(this, 'ServerlessUI', {
-      buildId: 'advanced-example',
+      buildId: props?.buildId
+        ? `advanced-example-${props.buildId}`
+        : 'advanced-example',
       uiSources: [Source.asset(`${__dirname}/../../build`)],
       apiEntries: [`${__dirname}/../../functions/graphql.ts`],
       apiEnvironment: {
