@@ -7,18 +7,6 @@ const dynamoClient = new DynamoDB.DocumentClient({
   apiVersion: '2012-08-10',
 });
 
-const fetchAllOrders = async (): Promise<Order[]> => {
-  if (process.env.TABLE_NAME) {
-    const query: DynamoDB.DocumentClient.ScanInput = {
-      TableName: process.env.TABLE_NAME,
-    };
-    const results = await dynamoClient.scan(query).promise();
-    return results.Items as Order[];
-  }
-  console.error('TABLE_NAME is not set');
-  return [];
-};
-
 const fetchOrdersByStatusCode = async (status: Status): Promise<Order[]> => {
   if (process.env.TABLE_NAME) {
     const query: DynamoDB.DocumentClient.QueryInput = {
@@ -36,10 +24,17 @@ const fetchOrdersByStatusCode = async (status: Status): Promise<Order[]> => {
   return [];
 };
 
+const fetchOrdersByStatusCodes = async (
+  statuses: Status[],
+): Promise<Order[]> => {
+  const promises = statuses.map((status) => fetchOrdersByStatusCode(status));
+  return (await Promise.all(promises)).flat();
+};
+
 const resolvers: Resolvers = {
   Query: {
     findOrders: async (_parent, { status }): Promise<Order[]> => {
-      return await fetchOrdersByStatusCode(status ?? Status.Pending);
+      return await fetchOrdersByStatusCode(status);
     },
   },
 };

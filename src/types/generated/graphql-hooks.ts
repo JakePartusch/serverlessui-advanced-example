@@ -22,13 +22,13 @@ export type Query = {
 
 
 export type QueryFindOrdersArgs = {
-  status?: Maybe<Status>;
+  status: Status;
 };
 
 export enum Status {
   Pending = 'PENDING',
   Shipped = 'SHIPPED',
-  Complete = 'COMPLETE'
+  Delivered = 'DELIVERED'
 }
 
 export type Node = {

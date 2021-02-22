@@ -5,13 +5,13 @@ schema {
 }
 
 type Query {
-  findOrders(status: Status): [Order]
+  findOrders(status: Status!): [Order]
 }
 
 enum Status {
   PENDING
   SHIPPED
-  COMPLETE
+  DELIVERED
 }
 
 interface Node {

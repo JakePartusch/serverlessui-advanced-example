@@ -22,13 +22,13 @@ export type Query = {
 
 
 export type QueryFindOrdersArgs = {
-  status?: Maybe<Status>;
+  status: Status;
 };
 
 export enum Status {
   Pending = 'PENDING',
   Shipped = 'SHIPPED',
-  Complete = 'COMPLETE'
+  Delivered = 'DELIVERED'
 }
 
 export type Node = {
@@ -151,7 +151,7 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
-  findOrders?: Resolver<Maybe<Array<Maybe<ResolversTypes['Order']>>>, ParentType, ContextType, RequireFields<QueryFindOrdersArgs, never>>;
+  findOrders?: Resolver<Maybe<Array<Maybe<ResolversTypes['Order']>>>, ParentType, ContextType, RequireFields<QueryFindOrdersArgs, 'status'>>;
 }>;
 
 export type NodeResolvers<ContextType = any, ParentType extends ResolversParentTypes['Node'] = ResolversParentTypes['Node']> = ResolversObject<{
