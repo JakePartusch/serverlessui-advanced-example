@@ -53,7 +53,7 @@ const OrderRow = ({ order }: OrderRowProps) => {
         USD
       </td>
       <td className="hidden px-6 py-4 text-sm text-gray-500 whitespace-nowrap md:block">
-        {order.status === Status.Complete && (
+        {order.status === Status.Delivered && (
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 capitalize">
             {order.status}
           </span>
