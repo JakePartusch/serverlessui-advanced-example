@@ -12,7 +12,7 @@ import WelcomeBanner from './WelcomeBanner';
 const Dashboard = () => {
   const { loading, data } = useFindOrdersQuery({
     variables: {
-      status: Status.Pending,
+      statuses: [Status.Pending, Status.Shipped],
     },
   });
   const orders: DashboardFieldsFragment[] = [];
