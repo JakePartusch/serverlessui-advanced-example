@@ -3,11 +3,17 @@ import { ServerlessUI } from '@serverlessui/construct';
 import { Source } from '@aws-cdk/aws-s3-deployment';
 import { Certificate } from '@aws-cdk/aws-certificatemanager';
 import { HostedZone } from '@aws-cdk/aws-route53';
-import { Table, AttributeType, ProjectionType } from '@aws-cdk/aws-dynamodb';
+import {
+  Table,
+  AttributeType,
+  ProjectionType,
+  BillingMode,
+} from '@aws-cdk/aws-dynamodb';
 import { Order } from '../../types/generated/graphql-resolvers';
+import { RemovalPolicy } from '@aws-cdk/core';
 
 interface InfrastructureStackProps extends cdk.StackProps {
-  buildId: string;
+  buildId?: string;
 }
 
 type SecondaryIndexNonKeyAttribute = keyof Order;
@@ -22,6 +28,8 @@ export class InfrastructureStack extends cdk.Stack {
     const table = new Table(this, 'Table', {
       partitionKey: { name: 'PK', type: AttributeType.STRING },
       sortKey: { name: 'SK', type: AttributeType.STRING },
+      billingMode: BillingMode.PAY_PER_REQUEST,
+      removalPolicy: RemovalPolicy.DESTROY,
     });
 
     const nonKeyAttributes: SecondaryIndexNonKeyAttribute[] = [
