@@ -28,11 +28,11 @@ jobs:
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            const manifest = require(`${process.env.GITHUB_WORKSPACE}/cdk.out/manifest.json`);
+            const manifest = require(`${process.env.GITHUB_WORKSPACE}/infrastructure/cdk.out/manifest.json`);
             const stackName = Object.keys(manifest.artifacts).find((key) =>
               key.startsWith("ServerlessUI")
             );
-            const template = require(`${process.env.GITHUB_WORKSPACE}/cdk.out/${stackName}.template.json`);
+            const template = require(`${process.env.GITHUB_WORKSPACE}/infrastructure/cdk.out/${stackName}.template.json`);
             const baseUrlKey = Object.keys(template.Outputs).find((key) =>
               key.startsWith("ServerlessUIBaseUrl")
             );
