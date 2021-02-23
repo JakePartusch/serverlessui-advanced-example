@@ -1,8 +1,10 @@
 {
   "scripts": {
     "start": "snowpack dev",
-    "deploy": "cd infrastructure && npm run cdk deploy -- --require-approval never",
-    "build": "snowpack build && cd infrastructure && npm run cdk synth",
+    "deploy": "cd infrastructure && npm run cdk deploy -- -c prod=true --require-approval never",
+    "deploy-preview": "cd infrastructure && npm run cdk deploy -- --require-approval never",
+    "build-preview": "snowpack build && cd infrastructure && npm run cdk synth",
+    "build": "snowpack build && cd infrastructure && npm run cdk synth -- -c prod=true",
     "test": "web-test-runner \"src/**/*.test.tsx\"",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "lint": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
