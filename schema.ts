@@ -8,13 +8,13 @@ export default gql`
   }
 
   type Query {
-    findOrders(status: Status): [Order]
+    findOrders(statuses: [Status!]!): [Order]
   }
 
   enum Status {
     PENDING
     SHIPPED
-    COMPLETE
+    DELIVERED
   }
 
   interface Node {
@@ -23,9 +23,16 @@ export default gql`
 
   type Order implements Node {
     id: ID!
-    customerFullName: String!
+    customer: Customer!
     totalPrice: Int!
     status: Status!
     createdDate: Date!
+  }
+
+  type Customer implements Node {
+    id: ID!
+    firstName: String!
+    lastName: String!
+    fullName: String!
   }
 `;

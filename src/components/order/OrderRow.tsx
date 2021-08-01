@@ -41,7 +41,7 @@ const OrderRow = ({ order }: OrderRowProps) => {
               />
             </svg>
             <p className="text-gray-500 truncate group-hover:text-gray-900">
-              Order from {order.customerFullName}
+              Order from {order.customer.fullName}
             </p>
           </a>
         </div>

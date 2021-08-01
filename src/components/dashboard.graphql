@@ -1,5 +1,5 @@
-query findOrders($status: Status!) {
-  findOrders(status: $status) {
+query findOrders($statuses: [Status!]!) {
+  findOrders(statuses: $statuses) {
     ...DashboardFields
   }
 }
@@ -9,5 +9,7 @@ fragment DashboardFields on Order {
   totalPrice
   status
   createdDate
-  customerFullName
+  customer {
+    fullName
+  }
 }

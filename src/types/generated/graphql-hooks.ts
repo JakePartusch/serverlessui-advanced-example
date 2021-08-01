@@ -22,7 +22,7 @@ export type Query = {
 
 
 export type QueryFindOrdersArgs = {
-  status: Status;
+  statuses: Array<Status>;
 };
 
 export enum Status {
@@ -38,14 +38,22 @@ export type Node = {
 export type Order = Node & {
   __typename?: 'Order';
   id: Scalars['ID'];
-  customerFullName: Scalars['String'];
+  customer: Customer;
   totalPrice: Scalars['Int'];
   status: Status;
   createdDate: Scalars['Date'];
 };
 
+export type Customer = Node & {
+  __typename?: 'Customer';
+  id: Scalars['ID'];
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+  fullName: Scalars['String'];
+};
+
 export type FindOrdersQueryVariables = Exact<{
-  status: Status;
+  statuses: Array<Status> | Status;
 }>;
 
 
@@ -59,7 +67,11 @@ export type FindOrdersQuery = (
 
 export type DashboardFieldsFragment = (
   { __typename?: 'Order' }
-  & Pick<Order, 'id' | 'totalPrice' | 'status' | 'createdDate' | 'customerFullName'>
+  & Pick<Order, 'id' | 'totalPrice' | 'status' | 'createdDate'>
+  & { customer: (
+    { __typename?: 'Customer' }
+    & Pick<Customer, 'fullName'>
+  ) }
 );
 
 export const DashboardFieldsFragmentDoc = gql`
@@ -68,12 +80,14 @@ export const DashboardFieldsFragmentDoc = gql`
   totalPrice
   status
   createdDate
-  customerFullName
+  customer {
+    fullName
+  }
 }
     `;
 export const FindOrdersDocument = gql`
-    query findOrders($status: Status!) {
-  findOrders(status: $status) {
+    query findOrders($statuses: [Status!]!) {
+  findOrders(statuses: $statuses) {
     ...DashboardFields
   }
 }
@@ -91,7 +105,7 @@ export const FindOrdersDocument = gql`
  * @example
  * const { data, loading, error } = useFindOrdersQuery({
  *   variables: {
- *      status: // value for 'status'
+ *      statuses: // value for 'statuses'
  *   },
  * });
  */

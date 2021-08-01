@@ -37,7 +37,7 @@ export class InfrastructureStack extends cdk.Stack {
       'status',
       'totalPrice',
       'createdDate',
-      'customerFullName',
+      'customer',
     ];
 
     table.addGlobalSecondaryIndex({
